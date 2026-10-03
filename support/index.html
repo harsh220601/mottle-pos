@@ -43,7 +43,7 @@
         <div class="help-card primary reveal">
           <h2>Report an issue</h2>
           <p>Describe what happened, what you expected, and your device and app version. Please don’t include guest names, ID numbers or card details.</p>
-          <div class="actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfP7oIu5GWsGP1WcWIw_g4N7ydCj4RIh4rdEXUlS_z4BDrW8g/viewform" rel="noopener">Open the support form</a></div>
+          <div class="actions"><a class="btn" href="#contact">Write to us</a></div>
         </div>
         <div class="help-card reveal" style="--d:1">
           <h2>Built-in guide</h2>
@@ -54,6 +54,61 @@
           <h2>Plan &amp; subscription</h2>
           <p>See your plan, subscribe, or restore a purchase.</p>
           <p class="small muted">Manage → Settings → Plan &amp; Rooms</p>
+        </div>
+      </div>
+
+      <div class="contact reveal" id="contact">
+        <div class="contact-head">
+          <h2 class="title">Send us a message</h2>
+          <p class="muted">We read every message. Leave your email and we’ll reply.</p>
+        </div>
+        <form class="support-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfP7oIu5GWsGP1WcWIw_g4N7ydCj4RIh4rdEXUlS_z4BDrW8g/formResponse" method="post" novalidate data-gform data-fallback="https://docs.google.com/forms/d/e/1FAIpQLSfP7oIu5GWsGP1WcWIw_g4N7ydCj4RIh4rdEXUlS_z4BDrW8g/viewform">
+          <fieldset class="field">
+            <legend>What best describes your message? <span class="req">Required</span></legend>
+            <div class="pills" data-error-for="entry.1389469550"><label class="pill"><input type="radio" name="entry.1389469550" value="Report a bug" required><span>Report a bug</span></label><label class="pill"><input type="radio" name="entry.1389469550" value="Ask a question"><span>Ask a question</span></label><label class="pill"><input type="radio" name="entry.1389469550" value="Suggest a feature"><span>Suggest a feature</span></label><label class="pill"><input type="radio" name="entry.1389469550" value="Something else"><span>Something else</span></label></div>
+          </fieldset>
+          <div class="field">
+            <label for="f-details">Tell us what’s going on <span class="req">Required</span></label>
+            <textarea id="f-details" name="entry.487204789" rows="6" required maxlength="4000" placeholder="What were you doing when it happened? What did you expect to happen?"></textarea>
+            <p class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg> Please don’t include guest names, ID numbers or card details.</p>
+          </div>
+          <div class="field-row">
+            <fieldset class="field">
+              <legend>Which device are you using?</legend>
+              <div class="pills"><label class="pill"><input type="radio" name="entry.1421374182" value="iPad"><span>iPad</span></label><label class="pill"><input type="radio" name="entry.1421374182" value="iPhone"><span>iPhone</span></label><label class="pill"><input type="radio" name="entry.1421374182" value="Not sure"><span>Not sure</span></label></div>
+            </fieldset>
+            <div class="field">
+              <label for="f-version">App version <span class="opt">Optional</span></label>
+              <input id="f-version" name="entry.797315198" type="text" inputmode="decimal" placeholder="e.g. 2.3" maxlength="20">
+              <p class="hint">In the app: Settings → About</p>
+            </div>
+          </div>
+          <div class="field-row three">
+            <div class="field">
+              <label for="f-name">Your name <span class="opt">Optional</span></label>
+              <input id="f-name" name="entry.1102968961" type="text" autocomplete="name" maxlength="120">
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="req">Required</span></label>
+              <input id="f-email" name="entry.925205177" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone <span class="opt">Optional</span></label>
+              <input id="f-phone" name="entry.999741960" type="tel" autocomplete="tel" maxlength="40">
+            </div>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+          <p class="form-error" role="alert" hidden></p>
+          <div class="form-foot">
+            <p class="small muted">Sent securely to our support inbox via Google Forms. See our <a href="../privacy-policy/#support">Privacy Policy</a>.</p>
+            <button class="btn send" type="submit"><span class="label">Send message</span><span class="spinner" aria-hidden="true"></span></button>
+          </div>
+        </form>
+        <div class="form-done" hidden tabindex="-1">
+          <div class="done-check" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
+          <h2 class="title">Thanks — we got it.</h2>
+          <p class="muted">We’ll reply to <strong data-echo-email></strong> as soon as we can.</p>
+          <button class="link-arrow again" type="button">Send another message</button>
         </div>
       </div>
       <div style="max-width:760px;margin:72px auto 0">
@@ -88,7 +143,7 @@
           <h4>Help</h4>
           <ul>
             <li><a href="../support/">Support</a></li>
-            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfP7oIu5GWsGP1WcWIw_g4N7ydCj4RIh4rdEXUlS_z4BDrW8g/viewform" rel="noopener">Report an issue</a></li>
+            <li><a href="../support/#contact">Report an issue</a></li>
             <li><a href="../data-deletion/">Data deletion</a></li>
           </ul>
         </div>

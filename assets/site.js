@@ -114,6 +114,81 @@
     sync();
   });
 
+  // Native support form → submits to the Google Form in the background
+  document.querySelectorAll('form[data-gform]').forEach(form => {
+    const wrap = form.closest('.contact');
+    const done = wrap.querySelector('.form-done');
+    const errorEl = form.querySelector('.form-error');
+    const button = form.querySelector('.send');
+    const DEVICE = 'entry.1421374182';
+
+    // Pre-select the visitor's device
+    const ua = navigator.userAgent;
+    const isIPad = /iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const guess = isIPad ? 'iPad' : /iPhone/.test(ua) ? 'iPhone' : null;
+    if (guess) { const r = form.querySelector(`input[name="${DEVICE}"][value="${guess}"]`); if (r) r.checked = true; }
+
+    // Allow ?topic=bug|question|feature from links
+    const topics = { bug: 'Report a bug', question: 'Ask a question', feature: 'Suggest a feature' };
+    const topic = topics[new URLSearchParams(location.search).get('topic')];
+    if (topic) { const r = form.querySelector(`input[value="${topic}"]`); if (r) r.checked = true; }
+
+    const clearInvalid = el => el.classList.remove('invalid');
+    form.addEventListener('input', e => { clearInvalid(e.target); const p = e.target.closest('.pills'); if (p) clearInvalid(p); errorEl.hidden = true; });
+
+    const validate = () => {
+      const problems = [];
+      const type = form.querySelector('input[name="entry.1389469550"]:checked');
+      if (!type) { form.querySelector('[data-error-for="entry.1389469550"]').classList.add('invalid'); problems.push('choose what your message is about'); }
+      const details = form.querySelector('#f-details');
+      if (details.value.trim().length < 5) { details.classList.add('invalid'); problems.push('tell us what’s going on'); }
+      const email = form.querySelector('#f-email');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) { email.classList.add('invalid'); problems.push('enter an email we can reply to'); }
+      return problems;
+    };
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (form.company.value) return; // bot
+      const problems = validate();
+      if (problems.length) {
+        errorEl.textContent = 'Please ' + problems.join(', ') + '.';
+        errorEl.hidden = false;
+        const first = form.querySelector('.invalid input, .invalid, input.invalid, textarea.invalid');
+        if (first) (first.matches('input,textarea') ? first : first.querySelector('input')).focus();
+        return;
+      }
+      const data = new URLSearchParams();
+      new FormData(form).forEach((v, k) => { if (k.startsWith('entry.') && String(v).trim()) data.append(k, String(v).trim()); });
+      button.disabled = true; button.classList.add('loading');
+      button.querySelector('.label').textContent = 'Sending…';
+      try {
+        await fetch(form.action, { method: 'POST', mode: 'no-cors', body: data });
+        done.querySelector('[data-echo-email]').textContent = form.querySelector('#f-email').value.trim();
+        form.hidden = true;
+        wrap.querySelector('.contact-head').hidden = true;
+        done.hidden = false;
+        done.focus();
+        wrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      } catch (err) {
+        errorEl.innerHTML = 'We couldn’t send that — check your connection and try again, or <a href="' + form.dataset.fallback + '" rel="noopener">use the Google Form</a>.';
+        errorEl.hidden = false;
+      } finally {
+        button.disabled = false; button.classList.remove('loading');
+        button.querySelector('.label').textContent = 'Send message';
+      }
+    });
+
+    done.querySelector('.again').addEventListener('click', () => {
+      const keep = ['#f-name', '#f-email', '#f-phone', '#f-version'].map(s => [s, form.querySelector(s).value]);
+      form.reset();
+      keep.forEach(([s, v]) => { form.querySelector(s).value = v; });
+      if (guess) { const r = form.querySelector(`input[name="${DEVICE}"][value="${guess}"]`); if (r) r.checked = true; }
+      done.hidden = true; form.hidden = false; wrap.querySelector('.contact-head').hidden = false;
+      form.querySelector('#f-details').focus();
+    });
+  });
+
   // Year in footer
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 })();
