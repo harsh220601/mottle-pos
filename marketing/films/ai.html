@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mottle AI — feature film</title>
+<link rel="stylesheet" href="../engine/base.css">
+<style>
+  .navy { position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 0%, #1c3a5e 0%, #10243e 42%, #050c16 100%); }
+  .orb { position: absolute; left: 50%; top: 50%; width: 520px; height: 520px; margin: -260px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0d58c, #d9ba62 22%, #4a90e2 58%, #1c5fb0 72%, transparent 74%);
+    filter: blur(2px); box-shadow: 0 0 160px 40px rgba(74,144,226,.35), 0 0 80px 10px rgba(217,186,98,.25); }
+  .orb::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 70% 75%, rgba(7,18,31,.55), transparent 55%); }
+  .ring { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1.5px solid rgba(217,186,98,.4); }
+  .title { font: 700 150px/1 var(--display); letter-spacing: -0.05em; }
+  .frame { position: absolute; width: 760px; height: 877px; padding: 12px; border-radius: 46px; right: 170px; top: 50%; margin-top: -438px;
+    background: linear-gradient(150deg, rgba(217,186,98,.7), rgba(28,95,176,.7) 55%, rgba(255,255,255,.08));
+    box-shadow: 0 80px 160px -50px rgba(28,95,176,.7), 0 40px 80px -40px rgba(0,0,0,.8); }
+  .frame .screen { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #f4f6f8; }
+  .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cap { position: absolute; left: 150px; top: 50%; width: 760px; transform: translateY(-50%); }
+  .cap h2 { font-size: 108px; }
+  .cap .q { margin-top: 34px; font: 600 40px/1.25 var(--display); letter-spacing: -0.02em; color: var(--gold-soft); }
+  .cap p { margin-top: 26px; font-size: 30px; line-height: 1.35; max-width: 620px; }
+  .rig { position: absolute; left: 50%; top: 50%; width: 1240px; height: 930px; margin: -465px 0 0 -620px; }
+  .cam { position: absolute; inset: 0; perspective: 2600px; }
+  .top { position: absolute; left: 0; right: 0; top: 80px; text-align: center; }
+  .top h2 { font-size: 88px; }
+  .fine { position: absolute; bottom: 44px; left: 0; right: 0; text-align: center; font: 500 19px/1 var(--text); color: rgba(245,245,247,.42); }
+  .end .icon { width: 170px; height: 170px; border-radius: 40px; box-shadow: 0 30px 80px -20px rgba(28,95,176,.9); }
+  .end h1 { font: 700 112px/1 var(--display); letter-spacing: -0.05em; margin-top: 40px; }
+  .end p { font: 500 38px/1.2 var(--text); color: rgba(245,245,247,.72); margin-top: 22px; }
+  .pills { display: flex; gap: 16px; justify-content: center; margin-top: 46px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="layer"><div class="navy"></div></div>
+  <div class="layer" id="glow"><div class="glow" style="left:10%;top:55%;width:900px;height:600px;background:rgba(28,95,176,.35)"></div>
+    <div class="glow" style="right:5%;top:10%;width:700px;height:500px;background:rgba(217,186,98,.14)"></div></div>
+
+  <!-- S1 orb + title -->
+  <div class="layer" id="s1">
+    <div class="ring" id="ring1" style="width:700px;height:700px;margin:-350px"></div>
+    <div class="ring" id="ring2" style="width:980px;height:980px;margin:-490px"></div>
+    <div class="orb" id="orb"></div>
+    <div class="layer center"><div>
+      <div class="title" id="t1">Mottle&nbsp;<span class="gold">AI</span></div>
+      <div class="headline" id="t2" style="font-size:72px;margin-top:26px;color:rgba(245,245,247,.86)">Ask your motel anything.</div>
+    </div></div>
+  </div>
+
+  <!-- tall AI panel -->
+  <div class="frame" id="frame"><div class="screen"><img id="panel" alt=""></div></div>
+
+  <div class="layer" id="c1"><div class="cap">
+    <h2 class="headline" id="h1">Ask<br><span class="dim">naturally.</span></h2>
+    <div class="q" id="q1">“Who’s arriving today?”</div>
+    <p class="body" id="p1">Type or dictate. Mottle AI understands the way your desk talks.</p>
+  </div></div>
+  <div class="layer" id="c2"><div class="cap">
+    <h2 class="headline" id="h2">Real answers.<br><span class="gold">From your records.</span></h2>
+    <div class="q" id="q2">“Show revenue in the last 7 days”</div>
+    <p class="body" id="p2">Mottle POS does the math. The model never invents a number.</p>
+  </div></div>
+  <div class="layer" id="c3"><div class="cap">
+    <h2 class="headline" id="h3">Ask. Preview.<br><span class="dim">Export.</span></h2>
+    <div class="q" id="q3">“Make that a PDF”</div>
+    <p class="body" id="p3">A real report, ready to preview, share or print.</p>
+  </div></div>
+
+  <!-- booking on landscape iPad -->
+  <div class="cam" id="cam"><div class="rig" id="rig"><div class="ipad" style="left:0;top:0"><div class="screen"><img id="book" alt=""></div></div></div></div>
+  <div class="layer" id="c4">
+    <div class="top"><h2 class="headline" id="h4">It can prepare a booking.</h2>
+      <h2 class="headline gold" id="h5" style="margin-top:4px">You review. You confirm.</h2></div>
+  </div>
+
+  <!-- end -->
+  <div class="layer center end" id="s5"><div style="display:grid;justify-items:center">
+    <img class="icon" id="icon" src="../../assets/app-icon-512.png" alt="">
+    <h1 id="e1">Mottle <span class="gold">AI</span></h1>
+    <p id="e2">On your iPad. Off the internet. Yours.</p>
+    <div class="pills" id="e3">
+      <div class="chip">Questions never leave the iPad</div>
+      <div class="chip">Never takes payments</div>
+      <div class="chip">Books only after you confirm</div>
+    </div>
+  </div></div>
+  <div class="fine" id="fine">Example figures shown. Mottle AI requires a supported device and a one-time model download.</div>
+  <div class="vignette"></div>
+</div>
+<script src="../engine/engine.js"></script>
+<script>
+const { tw, kf, win, css, $, $$, Seq, words, ease: E, range, clamp, lerp, Film } = M;
+const panel = new Seq($('#panel'), 'aipanel', 1203);
+const book = new Seq($('#book'), 'aibook', 144);
+const W = Object.fromEntries(['h1', 'h2', 'h3', 'h4', 'h5'].map(k => [k, words($('#' + k))]));
+function reveal(list, t, a, b, st = 0.08) {
+  list.forEach((w, i) => { const s = a + i * st; const p = E.outQuint(range(t, s, s + 0.9)); const o = E.in(range(t, b - 0.4, b));
+    css(w, { y: (1 - p) * 110 - o * 30, o: p * (1 - o), blur: (1 - p) * 10 + o * 8 }); });
+}
+function fadeUp(el, t, a, b, d = 0.9) { const p = E.outQuint(range(t, a, a + d)); css(el, { o: p * (1 - E.in(range(t, b - 0.4, b))), y: (1 - p) * 30 }); }
+function show(id, t, a, b) { const v = t >= a - 0.05 && t <= b + 0.05; $(id).style.display = v ? '' : 'none'; return v; }
+
+Film({
+  duration: 33.6, fps: 60, bpm: 100, music: 'ai',
+  cues: [
+    { t: 0, type: 'section', level: 0 }, { t: 0.6, type: 'chime', note: 'C6', gain: 0.6 },
+    { t: 1.6, type: 'impact', gain: 0.6 },
+    { t: 4.8, type: 'section', level: 1 }, { t: 4.8, type: 'whoosh', dur: 1.0 },
+    { t: 5.4, type: 'type', n: 21, dur: 2.0 }, { t: 10.2, type: 'success', gain: 0.5 },
+    { t: 9.6, type: 'section', level: 2 }, { t: 13.0, type: 'whoosh', dur: 0.7, up: false },
+    { t: 13.4, type: 'type', n: 28, dur: 2.6 }, { t: 17.4, type: 'chime', note: 'G6', gain: 0.5 },
+    { t: 19.2, type: 'whoosh', dur: 0.7 }, { t: 19.4, type: 'type', n: 15, dur: 1.4 }, { t: 22.6, type: 'tick' },
+    { t: 24, type: 'riser', dur: 1.6 }, { t: 24, type: 'impact', gain: 0.6 }, { t: 24, type: 'section', level: 3 },
+    { t: 28.6, type: 'success', gain: 0.6 }, { t: 21, type: 'poster' },
+    { t: 30, type: 'whoosh', dur: 1.0, up: false }, { t: 30.2, type: 'end' },
+  ],
+  frame(t, pending) {
+    css($('#glow'), { o: 0.6 + 0.4 * Math.sin(t * 0.8), x: Math.sin(t * 0.3) * 60 });
+    // S1
+    if (show('#s1', t, 0, 5)) {
+      const op = E.spring(range(t, 0.2, 2.0), 0.15);
+      const out = E.inExpo(range(t, 4.2, 5));
+      css($('#orb'), { s: lerp(0.2, 1, op) * (1 + 0.03 * Math.sin(t * 3)) * (1 + out * 3), o: range(t, 0.2, 0.5) * (1 - out) * (1 - range(t, 1.6, 2.4) * 0.65) });
+      css($('#ring1'), { s: tw(t, 0.6, 3.5, 0.6, 1.2, E.outQuint), o: win(t, 0.6, 4.6, 0.6, 1) * 0.8 });
+      css($('#ring2'), { s: tw(t, 0.9, 4.0, 0.6, 1.25, E.outQuint), o: win(t, 0.9, 4.6, 0.6, 1) * 0.5 });
+      fadeUp($('#t1'), t, 1.6, 4.8, 1.1);
+      css($('#t1'), { blur: (1 - E.outQuint(range(t, 1.6, 2.6))) * 14 });
+      fadeUp($('#t2'), t, 2.5, 4.8, 1.0);
+    }
+    // tall frame 4.8 → 24
+    const fin = E.spring(range(t, 4.8, 6.2), 0.1);
+    const fout = E.inExpo(range(t, 23.4, 24.2));
+    $('#frame').style.display = t > 4.7 && t < 24.3 ? '' : 'none';
+    if (t > 4.7 && t < 24.3) {
+      css($('#frame'), { x: lerp(500, 0, fin) + fout * 900, s: lerp(0.9, 1, fin), o: range(t, 4.8, 5.1) * (1 - fout), r: (1 - fin) * 4 });
+      // source timing: 4.5→12.5 over 4.8→13, 12.5→18.7 over 13→19.2, 20.5→25.3 over 19.2→24
+      const src = t < 13 ? 4.5 + (t - 4.8) : t < 19.2 ? 12.5 + (t - 13) : 20.5 + (t - 19.2);
+      pending.push(panel.at(src));
+    }
+    if (show('#c1', t, 4.9, 13)) { reveal(W.h1, t, 5.1, 12.9); fadeUp($('#q1'), t, 5.6, 12.9); fadeUp($('#p1'), t, 6.4, 12.9); }
+    if (show('#c2', t, 13, 19.2)) { reveal(W.h2, t, 13.1, 19.1, 0.07); fadeUp($('#q2'), t, 13.6, 19.1); fadeUp($('#p2'), t, 14.6, 19.1); }
+    if (show('#c3', t, 19.2, 24)) { reveal(W.h3, t, 19.3, 23.9); fadeUp($('#q3'), t, 19.6, 23.9); fadeUp($('#p3'), t, 20.4, 23.9); }
+    // landscape booking 24 → 30.2
+    const vis = t > 23.8 && t < 30.4;
+    $('#cam').style.display = vis ? '' : 'none';
+    if (vis) {
+      const r = E.spring(range(t, 23.9, 25.6), 0.08);
+      const o = E.inExpo(range(t, 29.6, 30.3));
+      css($('#rig'), { y: lerp(1100, 110, r) + o * 1100, rx: lerp(30, 0, r) - o * 20, s: 0.74 + range(t, 25, 30) * 0.03 });
+      pending.push(book.at(t - 24.6, 0.85));
+    }
+    if (show('#c4', t, 24, 30.2)) { reveal(W.h4, t, 24.3, 30.1, 0.06); reveal(W.h5, t, 26.4, 30.1, 0.08); }
+    // end
+    if (show('#s5', t, 30.1, 33.6)) {
+      const ip = E.spring(range(t, 30.2, 31.3), 0.2);
+      css($('#icon'), { s: lerp(0.5, 1, ip), o: range(t, 30.2, 30.5) * (1 - range(t, 33.1, 33.6)) });
+      fadeUp($('#e1'), t, 30.5, 33.6); fadeUp($('#e2'), t, 30.9, 33.6);
+      $$('#e3 .chip').forEach((c, i) => { const p = E.spring(range(t, 31.3 + i * 0.15, 32.3 + i * 0.15), 0.25);
+        css(c, { o: range(t, 31.3 + i * 0.15, 31.5 + i * 0.15) * (1 - range(t, 33.1, 33.6)), s: lerp(0.8, 1, p) }); });
+    }
+    css($('#fine'), { o: Math.max(win(t, 13.2, 23.8, 0.6, 0.4), win(t, 30.6, 33.4, 0.6, 0.4)) });
+  },
+});
+</script>
+</body>
+</html>

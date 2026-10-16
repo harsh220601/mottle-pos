@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Private by design — Mottle POS</title>
+<link rel="stylesheet" href="../engine/base.css">
+<style>
+  body, .stage { background: #fbfbfd; color: #1d1d1f; }
+  .stage .dim { color: #86868b; }
+  .blue { color: #1c5fb0; }
+  .big { font-size: 120px; }
+  .mid { font-size: 92px; }
+  .lock { width: 260px; height: 260px; }
+  .lock path, .lock rect, .lock circle { fill: none; stroke: #1d1d1f; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .list { display: grid; gap: 30px; margin-top: 70px; justify-items: start; }
+  .row { display: flex; align-items: center; gap: 26px; font: 700 56px/1 var(--display); letter-spacing: -0.03em; }
+  .row svg { width: 54px; height: 54px; }
+  .row svg path { fill: none; stroke: #216b4a; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .row svg circle { fill: rgba(33,107,74,.1); stroke: none; }
+  .rig { position: absolute; left: 50%; top: 50%; width: 1240px; height: 930px; margin: -465px 0 0 -620px; }
+  .cam { position: absolute; inset: 0; perspective: 2600px; }
+  .stage .ipad { box-shadow: 0 0 0 2px #c7c7cc, 0 0 0 3.5px #e5e5ea, 0 80px 140px -50px rgba(0,0,0,.35); }
+  .status { position: absolute; top: 18px; right: 30px; display: flex; gap: 10px; align-items: center; z-index: 3; }
+  .wifi { width: 46px; height: 46px; }
+  .wifi path, .wifi circle { fill: none; stroke: #1d1d1f; stroke-width: 2; stroke-linecap: round; }
+  .slash { stroke: #a33e42 !important; stroke-width: 2.4 !important; }
+  .top { position: absolute; left: 0; right: 0; top: 76px; text-align: center; }
+  .chip.light { font-size: 30px; }
+  .file { width: 220px; height: 220px; }
+  .file path, .file rect, .file circle { fill: none; stroke: #1d1d1f; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .end .icon { width: 180px; height: 180px; border-radius: 42px; box-shadow: 0 30px 60px -20px rgba(16,36,62,.45); }
+  .end h1 { font: 700 112px/1 var(--display); letter-spacing: -0.05em; margin-top: 40px; color: #1d1d1f; }
+  .end p { font: 500 40px/1.2 var(--text); color: #6e6e73; margin-top: 18px; }
+  .end .badge { margin-top: 48px; border-color: #000; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="layer center" id="s1"><div>
+    <h2 class="headline dim mid" id="h1">Most hotel software lives<br>in someone else’s cloud.</h2>
+  </div></div>
+  <div class="layer center" id="s2"><div>
+    <h2 class="display big" id="h2">Mottle POS lives<br>on <span class="blue">your iPad.</span></h2>
+  </div></div>
+
+  <div class="layer center" id="s3"><div style="display:grid;justify-items:center">
+    <svg class="lock" id="lock" viewBox="0 0 24 24"><rect id="lk-body" x="5" y="11" width="14" height="10" rx="2.5"/><path id="lk-arc" d="M8 11V8a4 4 0 0 1 8 0v3"/><circle id="lk-dot" cx="12" cy="16" r="1.2"/></svg>
+    <div class="list" id="list">
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>No Mottle cloud account.</span></div>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Guest records stay on the device.</span></div>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Staff PINs and a tamper-evident log.</span></div>
+    </div>
+  </div></div>
+
+  <div class="layer" id="s4">
+    <div class="top"><h2 class="headline" id="h4" style="font-size:84px">Internet down? <span class="dim">Keep checking guests in.</span></h2></div>
+    <div class="cam"><div class="rig" id="rig"><div class="ipad" style="left:0;top:0"><div class="screen">
+      <img src="../../assets/ipad-dashboard.jpg" alt="">
+    </div></div></div></div>
+    <div class="abs" id="offline" style="left:50%;top:60%;transform:translate(-50%,-50%)">
+      <div class="chip light" style="gap:18px"><svg class="wifi" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M8.8 15.5a5 5 0 0 1 6.4 0"/><circle cx="12" cy="19" r="1"/><path class="slash" id="slash" d="M3 3l18 18"/></svg><span>Offline · The desk stays open</span></div>
+    </div>
+  </div>
+
+  <div class="layer center" id="s5"><div style="display:grid;justify-items:center">
+    <svg class="file" id="file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect x="8.5" y="13" width="7" height="5" rx="1.2"/><path d="M10 13v-1.5a2 2 0 0 1 4 0V13"/></svg>
+    <h2 class="headline mid" id="h5" style="margin-top:46px">Backups encrypted with a password<br><span class="dim">only you know.</span></h2>
+  </div></div>
+
+  <div class="layer center end" id="s6"><div style="display:grid;justify-items:center">
+    <img class="icon" id="icon" src="../../assets/app-icon-512.png" alt="">
+    <h1 id="e1">Private by design.</h1>
+    <p id="e2">Mottle POS — the front desk for independent motels.</p>
+    <div class="badge" id="e3"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+      <span><small>Download on the</small><strong>App Store</strong></span></div>
+  </div></div>
+</div>
+<script src="../engine/engine.js"></script>
+<script>
+const { tw, kf, win, css, $, $$, words, ease: E, range, clamp, lerp, Film } = M;
+const W = Object.fromEntries(['h1', 'h2', 'h4', 'h5'].map(k => [k, words($('#' + k))]));
+function reveal(list, t, a, b, st = 0.08) {
+  list.forEach((w, i) => { const s = a + i * st; const p = E.outQuint(range(t, s, s + 1.1)); const o = E.in(range(t, b - 0.45, b));
+    css(w, { y: (1 - p) * 100 - o * 24, o: p * (1 - o), blur: (1 - p) * 8 + o * 6 }); });
+}
+function show(id, t, a, b) { const v = t >= a - 0.05 && t <= b + 0.05; $(id).style.display = v ? '' : 'none'; return v; }
+// stroke drawing
+function draw(el, p) { const L = el.getTotalLength ? el.getTotalLength() : 60; el.style.strokeDasharray = L; el.style.strokeDashoffset = (L * (1 - p)).toFixed(3); }
+const BAR = 60 / 72 * 4;
+
+Film({
+  duration: 26.7, fps: 60, bpm: 72, music: 'privacy',
+  cues: [
+    { t: 0, type: 'section', level: 1 },
+    { t: 3.9, type: 'whoosh', dur: 0.8, gain: 0.5 }, { t: 4.2, type: 'chime', note: 'E6', gain: 0.5 },
+    { t: 6.67, type: 'section', level: 2 },
+    { t: 7.6, type: 'tick', f: 1600 }, { t: 9.4, type: 'success', gain: 0.45 },
+    { t: 10.0, type: 'tick' }, { t: 10.6, type: 'tick', f: 2600 }, { t: 11.2, type: 'tick', f: 2800 },
+    { t: 13.3, type: 'whoosh', dur: 0.9, gain: 0.5, up: false }, { t: 15.6, type: 'tick', f: 1200 },
+    { t: 16, type: 'poster' },
+    { t: 20, type: 'whoosh', dur: 0.8, gain: 0.5 }, { t: 21.4, type: 'tick', f: 1800 },
+    { t: 23.3, type: 'end' },
+  ],
+  frame(t) {
+    if (show('#s1', t, 0, 4.1)) reveal(W.h1, t, 0.5, 4.0, 0.07);
+    if (show('#s2', t, 4.0, 7.3)) { reveal(W.h2, t, 4.15, 7.2, 0.09); css($('#s2'), { s: tw(t, 4, 7.3, 1, 1.03, E.linear) }); }
+    if (show('#s3', t, 7.3, 13.3)) {
+      const out = E.in(range(t, 12.8, 13.3));
+      draw($('#lk-body'), E.inOut(range(t, 7.5, 8.6)));
+      draw($('#lk-arc'), E.inOut(range(t, 8.0, 9.0)));
+      const shut = E.spring(range(t, 9.1, 9.9), 0.35);
+      css($('#lk-arc'), { y: (1 - shut) * -1.6 });
+      css($('#lk-dot'), { o: range(t, 9.2, 9.5) });
+      css($('#lock'), { o: 1 - out, s: lerp(1.25, 1, E.outQuint(range(t, 7.3, 9.5))), y: tw(t, 9.6, 10.4, 140, 0, E.inOutQuint) });
+      $$('#list .row').forEach((r, i) => {
+        const a = 9.9 + i * 0.6; const p = E.outQuint(range(t, a, a + 0.9));
+        css(r, { o: p * (1 - out), x: (1 - p) * -40 });
+        draw(r.querySelector('path'), E.inOut(range(t, a + 0.15, a + 0.7)));
+      });
+      css($('#list'), { o: range(t, 9.8, 9.9) });
+    }
+    if (show('#s4', t, 13.3, 20.0)) {
+      reveal(W.h4, t, 13.5, 19.9, 0.07);
+      const r = E.spring(range(t, 13.4, 15.2), 0.08);
+      const o = E.inExpo(range(t, 19.3, 20.0));
+      css($('#rig'), { y: lerp(1100, 120, r) + o * 1100, rx: lerp(28, 0, r), s: 0.74 });
+      const c = E.spring(range(t, 15.3, 16.3), 0.25);
+      css($('#offline'), { o: range(t, 15.3, 15.5) * (1 - o), s: lerp(0.7, 1, c) });
+      draw($('#slash'), E.inOut(range(t, 15.6, 16.2)));
+    }
+    if (show('#s5', t, 20.0, 23.4)) {
+      const out = E.in(range(t, 22.9, 23.35));
+      const fp = E.outQuint(range(t, 20.1, 21.2));
+      css($('#file'), { o: fp * (1 - out), y: (1 - fp) * 40 });
+      $$('#file path, #file rect').forEach((p, i) => draw(p, E.inOut(range(t, 20.2 + i * 0.25, 21.2 + i * 0.25))));
+      reveal(W.h5, t, 20.6, 23.3, 0.06);
+    }
+    if (show('#s6', t, 23.3, 26.7)) {
+      const ip = E.spring(range(t, 23.4, 24.5), 0.2);
+      const out = range(t, 26.1, 26.7);
+      css($('#icon'), { s: lerp(0.5, 1, ip), o: range(t, 23.4, 23.7) * (1 - out) });
+      [['#e1', 23.7], ['#e2', 24.1], ['#e3', 24.5]].forEach(([id, a]) => { const p = E.outQuint(range(t, a, a + 1));
+        css($(id), { o: p * (1 - out), y: (1 - p) * 30, blur: (1 - p) * 6 }); });
+    }
+  },
+});
+</script>
+</body>
+</html>

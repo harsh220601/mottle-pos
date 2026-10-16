@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mottle POS — vertical reel</title>
+<link rel="stylesheet" href="../engine/base.css">
+<style>
+  :root { --W: 1080px; --H: 1920px; }
+  .bg { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 70%, #10243e, #000 75%); }
+  .flash { position: absolute; inset: 0; background: #fff; }
+  .slam { font: 800 190px/0.95 var(--display); letter-spacing: -0.055em; text-align: center; }
+  .slam .w { padding-bottom: 0.08em; }
+  .hd { font: 700 120px/1.0 var(--display); letter-spacing: -0.045em; text-align: center; }
+  .sub { font: 600 44px/1.2 var(--text); color: rgba(245,245,247,.7); text-align: center; margin-top: 26px; letter-spacing: -0.02em; }
+  .top { position: absolute; left: 60px; right: 60px; top: 200px; }
+  .bottom { position: absolute; left: 60px; right: 60px; bottom: 220px; }
+  .mid { position: absolute; left: 50%; top: 50%; }
+  .icon { width: 300px; height: 300px; border-radius: 68px; box-shadow: 0 50px 140px -30px rgba(28,95,176,.9); }
+  .stage .iphone { width: 600px; }
+  .stage .iphone.sm { width: 400px; }
+  .rig { position: absolute; left: 50%; top: 50%; width: 1240px; height: 930px; margin: -465px 0 0 -620px; }
+  .cam { position: absolute; inset: 0; perspective: 2200px; }
+  .chip { font-size: 40px; padding: 22px 34px; }
+  .chip i { width: 18px; height: 18px; }
+  .num { font: 800 230px/1 var(--display); letter-spacing: -0.06em; text-align: center; }
+  .bubble { font: 600 50px/1.25 var(--text); padding: 30px 40px; border-radius: 44px; max-width: 860px; letter-spacing: -0.02em; }
+  .ask { background: #1c5fb0; color: #fff; border-bottom-right-radius: 12px; margin-left: auto; }
+  .ans { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16); color: #f5f5f7; border-bottom-left-radius: 12px; }
+  .ans b { color: var(--gold-soft); }
+  .wifi-big { width: 420px; height: 420px; }
+  .wifi-big path, .wifi-big circle { fill: none; stroke: #f5f5f7; stroke-width: 1.4; stroke-linecap: round; }
+  .wifi-big .slash { stroke: var(--gold-soft); stroke-width: 1.8; }
+  .fine { position: absolute; bottom: 80px; left: 0; right: 0; text-align: center; font: 500 26px/1.3 var(--text); color: rgba(245,245,247,.45); }
+  .badge { transform-origin: center; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="layer"><div class="bg" id="bg"></div></div>
+
+  <div class="layer center" id="s1"><div class="slam" id="h1">Still running<br>your motel<br><span class="gold">on paper?</span></div></div>
+
+  <div class="layer center" id="s2"><div style="display:grid;justify-items:center;gap:60px">
+    <img class="icon" id="icon1" src="../../assets/app-icon-512.png" alt="">
+    <div class="hd" id="h2">Mottle <span class="gold">POS</span></div>
+  </div></div>
+
+  <div class="layer" id="s3">
+    <div class="top"><div class="hd" id="h3">Every room.<br><span class="dim">Live.</span></div></div>
+    <div class="iphone" id="ph1" style="left:240px;top:640px"><div class="screen"><img src="../../assets/iphone-rooms.jpg" alt=""></div></div>
+    <div class="abs" id="chips" style="left:0;right:0;top:1180px">
+      <div class="chip abs" style="left:60px;top:0;color:#6fd39f"><i></i><span style="color:#fff">Available</span></div>
+      <div class="chip abs" style="right:60px;top:160px;color:#e9b949"><i></i><span style="color:#fff">Dirty</span></div>
+      <div class="chip abs" style="left:80px;top:330px;color:#7fb2f0"><i></i><span style="color:#fff">Occupied</span></div>
+    </div>
+  </div>
+
+  <div class="cam" id="cam"><div class="rig" id="rig"><div class="ipad" style="left:0;top:0"><div class="screen"><img id="sc-book" alt=""><img id="sc-checkin" alt=""></div></div></div></div>
+  <div class="layer" id="s4"><div class="top"><div class="hd" id="h4">Book in<br><span class="gold">seconds.</span></div></div></div>
+  <div class="layer" id="s5"><div class="top"><div class="hd" id="h5">ID scan to<br><span class="gold">checked in.</span></div></div></div>
+
+  <div class="layer center" id="s6"><div>
+    <div class="sub" id="l6" style="margin:0 0 20px">Revenue this month</div>
+    <div class="num grad" id="n6">$0</div>
+    <div class="sub" id="d6">▲ 15.3% vs last month</div>
+    <div class="sub" id="f6" style="font-size:26px;color:rgba(245,245,247,.4)">Example figures shown.</div>
+  </div></div>
+
+  <div class="layer" id="s7">
+    <div class="top"><div class="hd" id="h7">Ask your<br><span class="gold">motel anything.</span></div></div>
+    <div class="abs" style="left:80px;right:80px;top:900px;display:grid;gap:36px">
+      <div class="bubble ask" id="b1"><span id="b1t"></span></div>
+      <div class="bubble ans" id="b2">Showing <b>5 arrivals</b> for today. Tap a card to open the stay.</div>
+    </div>
+    <div class="fine" id="f7">Mottle AI runs on your iPad. Requires a supported device<br>and a one-time model download. Example data shown.</div>
+  </div>
+
+  <div class="layer center" id="s8"><div style="display:grid;justify-items:center">
+    <svg class="wifi-big" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M8.8 15.5a5 5 0 0 1 6.4 0"/><circle cx="12" cy="19" r="1"/><path class="slash" id="slash" d="M3 3l18 18"/></svg>
+    <div class="hd" id="h8" style="margin-top:60px">Internet down?<br><span class="gold">Desk stays open.</span></div>
+  </div></div>
+
+  <div class="layer" id="s9">
+    <div class="top"><div class="hd" id="h9">Your data.<br><span class="dim">Your iPad.</span></div></div>
+    <div class="mid" id="fan" style="top:1180px">
+      <div class="iphone sm" style="left:-200px;top:-435px"><div class="screen"><img src="../../assets/iphone-dashboard.jpg" alt=""></div></div>
+      <div class="iphone sm" style="left:-200px;top:-435px"><div class="screen"><img src="../../assets/iphone-reports.jpg" alt=""></div></div>
+      <div class="iphone sm" style="left:-200px;top:-435px"><div class="screen"><img src="../../assets/iphone-rooms.jpg" alt=""></div></div>
+    </div>
+  </div>
+
+  <div class="layer center" id="s10"><div style="display:grid;justify-items:center">
+    <img class="icon" id="icon2" src="../../assets/app-icon-512.png" alt="" style="width:240px;height:240px;border-radius:54px">
+    <div class="hd" id="e1" style="margin-top:50px">Mottle POS</div>
+    <div class="sub" id="e2">Free for 30 days. Up to 3 rooms.</div>
+    <div class="badge" id="e3" style="margin-top:60px;transform:scale(1.4)"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+      <span><small>Download on the</small><strong>App Store</strong></span></div>
+    <div class="sub" id="e4" style="font-size:30px;margin-top:70px;color:rgba(245,245,247,.45)">Listed on the App Store as HOTEL POS.</div>
+  </div></div>
+
+  <div class="layer"><div class="flash" id="flash" style="opacity:0"></div></div>
+  <div class="vignette"></div>
+</div>
+<script src="../engine/engine.js"></script>
+<script>
+const { tw, kf, win, css, $, $$, Seq, words, ease: E, range, clamp, lerp, Film } = M;
+const book = new Seq($('#sc-book'), 'book', 103);
+const checkin = new Seq($('#sc-checkin'), 'checkin', 151);
+const W = Object.fromEntries(['h1', 'h2', 'h3', 'h4', 'h5', 'h7', 'h8', 'h9'].map(k => [k, words($('#' + k))]));
+// Punchy slam: each word drops in scaled up, lands on a beat.
+function slam(list, t, a, b, st = 0.25) {
+  list.forEach((w, i) => { const s = a + i * st; const p = E.outExpo(range(t, s, s + 0.35)); const o = E.in(range(t, b - 0.2, b));
+    css(w, { s: lerp(1.8, 1, p), o: range(t, s, s + 0.08) * (1 - o), blur: (1 - p) * 14, y: -o * 40 }); });
+}
+function rise(list, t, a, b, st = 0.06) {
+  list.forEach((w, i) => { const s = a + i * st; const p = E.outQuint(range(t, s, s + 0.6)); const o = E.in(range(t, b - 0.25, b));
+    css(w, { y: (1 - p) * 120 - o * 40, o: p * (1 - o), blur: (1 - p) * 8 }); });
+}
+function show(id, t, a, b) { const v = t >= a - 0.03 && t <= b + 0.03; $(id).style.display = v ? '' : 'none'; return v; }
+function draw(el, p) { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = (L * (1 - p)).toFixed(3); }
+const Q = 'Who’s arriving today?';
+const hits = [2, 4, 6, 8, 10, 12, 14, 16, 18];
+
+Film({
+  width: 1080, height: 1920, duration: 21, fps: 60, bpm: 120, music: 'reel',
+  cues: [
+    { t: 0, type: 'section', level: 1 },
+    { t: 0.3, type: 'impact', gain: 0.5 }, { t: 0.55, type: 'impact', gain: 0.45 }, { t: 0.8, type: 'impact', gain: 0.45 },
+    { t: 1.05, type: 'impact', gain: 0.5 }, { t: 1.3, type: 'impact', gain: 0.5 }, { t: 1.55, type: 'impact', gain: 0.6 },
+    { t: 2, type: 'section', level: 3 }, { t: 2, type: 'riser', dur: 1.0, gain: 0.7 },
+    ...hits.map(t => ({ t, type: 'whoosh', dur: 0.5, gain: 0.55, up: t % 4 === 0 })),
+    { t: 4.5, type: 'tick' }, { t: 4.7, type: 'tick', f: 2700 }, { t: 4.9, type: 'tick', f: 3000 },
+    { t: 9.6, type: 'success', gain: 0.5 }, { t: 10.2, type: 'tick' },
+    { t: 12.3, type: 'type', n: 21, dur: 1.0 }, { t: 13.4, type: 'chime', note: 'B5', gain: 0.5 },
+    { t: 14.5, type: 'impact', gain: 0.6 }, { t: 17, type: 'poster' },
+    { t: 18, type: 'end' },
+  ],
+  frame(t, pending) {
+    css($('#bg'), { s: 1 + 0.04 * Math.sin(t * 1.3) });
+    // white flash on each cut
+    const fl = Math.max(0, ...hits.map(h => (t >= h && t < h + 0.18) ? 1 - (t - h) / 0.18 : 0));
+    css($('#flash'), { o: 0.16 * fl });
+
+    if (show('#s1', t, 0, 2)) slam(W.h1, t, 0.25, 2.0, 0.25);
+    if (show('#s2', t, 2, 4)) {
+      const p = E.spring(range(t, 2.0, 2.9), 0.3);
+      css($('#icon1'), { s: lerp(0.3, 1, p), r: (1 - p) * -20, o: range(t, 2, 2.1) * (1 - range(t, 3.8, 4)) });
+      rise(W.h2, t, 2.3, 4.0, 0.1);
+    }
+    if (show('#s3', t, 4, 6)) {
+      rise(W.h3, t, 4.05, 6.0);
+      const p = E.outExpo(range(t, 4.0, 4.6));
+      css($('#ph1'), { y: (1 - p) * 900 + range(t, 4.6, 6) * -40, r: (1 - p) * 10, s: 0.95 + range(t, 4, 6) * 0.06 });
+      $$('#chips .chip').forEach((c, i) => { const a = 4.5 + i * 0.2; const q = E.spring(range(t, a, a + 0.7), 0.3);
+        css(c, { o: range(t, a, a + 0.06) * (1 - range(t, 5.8, 6)), s: lerp(0.5, 1, q) }); });
+    }
+    const vis = t > 5.95 && t < 10.05;
+    $('#cam').style.display = vis ? '' : 'none';
+    if (vis) {
+      // iPad, oversized and tilted, cropped by the vertical frame
+      const p = E.outExpo(range(t, 6, 6.6));
+      const sw = E.inOutQuint(range(t, 7.8, 8.2));
+      css($('#rig'), { s: 1.12 + range(t, 6, 10) * 0.08, ry: lerp(-24, -14, p) + sw * 28, rx: 6, x: lerp(500, 120, p) - sw * 240, y: 260 });
+      css($('#sc-book'), { o: 1 - range(t, 7.9, 8.1) });
+      css($('#sc-checkin'), { o: range(t, 7.9, 8.1) });
+      pending.push(book.at((t - 6) * 1.6 + 0.4));
+      pending.push(checkin.at((t - 8) * 2.4));
+    }
+    if (show('#s4', t, 6, 8)) rise(W.h4, t, 6.05, 8.0);
+    if (show('#s5', t, 8, 10)) rise(W.h5, t, 8.05, 10.0);
+    if (show('#s6', t, 10, 12)) {
+      const p = E.outExpo(range(t, 10.1, 11.3));
+      $('#n6').textContent = M.money(12450 * p);
+      const z = E.spring(range(t, 10, 10.7), 0.25);
+      css($('#n6'), { s: lerp(0.6, 1, z), o: range(t, 10, 10.08) * (1 - range(t, 11.8, 12)) });
+      [['#l6', 10.1], ['#d6', 11.2], ['#f6', 11.3]].forEach(([id, a]) => css($(id), { o: range(t, a, a + 0.25) * (1 - range(t, 11.8, 12)) }));
+    }
+    if (show('#s7', t, 12, 14)) {
+      rise(W.h7, t, 12.05, 14.0);
+      const n = Math.round(clamp((t - 12.3) / 1.0) * Q.length);
+      $('#b1t').textContent = Q.slice(0, n) || ' ';
+      const p = E.spring(range(t, 12.2, 12.7), 0.3), q = E.spring(range(t, 13.4, 13.9), 0.3);
+      css($('#b1'), { o: range(t, 12.2, 12.3) * (1 - range(t, 13.8, 14)), s: lerp(0.8, 1, p) });
+      css($('#b2'), { o: range(t, 13.4, 13.5) * (1 - range(t, 13.8, 14)), s: lerp(0.8, 1, q), y: (1 - q) * 40 });
+      css($('#f7'), { o: range(t, 12.4, 12.7) * (1 - range(t, 13.8, 14)) });
+    }
+    if (show('#s8', t, 14, 16)) {
+      draw($('#slash'), E.outExpo(range(t, 14.4, 14.8)));
+      const s = 1 + (1 - E.spring(range(t, 14.5, 15.2), 0.4)) * 0.12 * (t > 14.5 ? 1 : 0);
+      css($('#s8 svg'), { s, o: range(t, 14, 14.1) * (1 - range(t, 15.8, 16)) });
+      rise(W.h8, t, 14.6, 16.0);
+    }
+    if (show('#s9', t, 16, 18)) {
+      rise(W.h9, t, 16.05, 18.0);
+      const f = E.spring(range(t, 16.1, 17.0), 0.15);
+      $$('#fan .iphone').forEach((ph, i) => { const d = i - 1;
+        css(ph, { x: d * lerp(0, 300, f), y: (1 - E.outExpo(range(t, 16, 16.5))) * 1000 + Math.abs(d) * 50 * f, r: d * 10 * f, s: i === 1 ? 1.05 : 0.92 });
+        ph.style.zIndex = i === 1 ? 2 : 1; });
+    }
+    if (show('#s10', t, 18, 21)) {
+      const p = E.spring(range(t, 18.0, 18.9), 0.25);
+      css($('#icon2'), { s: lerp(0.4, 1, p), o: range(t, 18, 18.1) * (1 - range(t, 20.6, 21)) });
+      [['#e1', 18.3], ['#e2', 18.6], ['#e3', 18.9], ['#e4', 19.2]].forEach(([id, a]) => {
+        const q = E.outQuint(range(t, a, a + 0.6));
+        css($(id), { o: q * (1 - range(t, 20.6, 21)), y: (1 - q) * 40, s: id === '#e3' ? 1.4 : undefined });
+      });
+    }
+  },
+});
+</script>
+</body>
+</html>
