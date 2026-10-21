@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Introducing Mottle POS — launch film</title>
+<link rel="stylesheet" href="../engine/base.css">
+<style>
+  .bg { background: #000; }
+  .aura { position: absolute; inset: -20%; background:
+    radial-gradient(40% 40% at var(--ax, 50%) var(--ay, 70%), rgba(28,95,176,.42), transparent 70%),
+    radial-gradient(30% 30% at calc(var(--ax, 50%) + 12%) calc(var(--ay, 70%) + 8%), rgba(184,137,59,.16), transparent 70%); }
+  .navy { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 0%, #1c3a5e 0%, #10243e 45%, #07121f 100%); }
+  .sweep { position: absolute; top: -40%; bottom: -40%; width: 26%; left: -30%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); transform: rotate(14deg); }
+
+  .intro-word { font: 600 54px/1 var(--display); letter-spacing: -0.01em; color: rgba(245,245,247,.6); }
+  .icon { width: 240px; height: 240px; border-radius: 54px; box-shadow: 0 40px 120px -20px rgba(28,95,176,.8), 0 0 0 1px rgba(255,255,255,.08); }
+  .wordmark { font: 700 132px/1 var(--display); letter-spacing: -0.05em; }
+
+  .cam { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 50% 45%; }
+  .rig { position: absolute; left: 50%; top: 50%; width: 1240px; height: 930px; margin: -465px 0 0 -620px; transform-style: preserve-3d; }
+  .rig .ipad { left: 0; top: 0; }
+  .shadow { position: absolute; left: 50%; top: 50%; width: 1300px; height: 120px; margin-left: -650px; margin-top: 470px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.65), transparent); filter: blur(20px); }
+
+  .side { position: absolute; top: 50%; width: 640px; transform: translateY(-50%); }
+  .side.left { left: 120px; }
+  .side.right { right: 120px; }
+  .side h2 { font-size: 104px; }
+  .side p { font-size: 32px; margin-top: 28px; line-height: 1.32; max-width: 560px; }
+  .top { position: absolute; left: 0; right: 0; top: 96px; text-align: center; }
+  .top h2 { font-size: 92px; }
+
+  .chips { display: flex; flex-direction: column; gap: 18px; margin-top: 44px; align-items: flex-start; }
+  .steps { display: flex; gap: 14px; margin-top: 40px; }
+  .step { font: 600 26px/1 var(--text); padding: 14px 22px; border-radius: 999px; background: rgba(255,255,255,.07); color: rgba(245,245,247,.5); border: 1px solid rgba(255,255,255,.1); }
+  .step.on { background: var(--gold-soft); color: #10243e; border-color: transparent; }
+  .step.done { color: #f5f5f7; background: rgba(33,107,74,.55); }
+
+  .license { position: absolute; width: 540px; height: 340px; border-radius: 28px; padding: 30px 34px; color: #10243e;
+    background: linear-gradient(135deg, #f4f7fb, #dfe9f6 55%, #c9dbf0); box-shadow: 0 50px 100px -30px rgba(0,0,0,.8); overflow: hidden; }
+  .license .h { display: flex; justify-content: space-between; font: 700 22px/1 var(--text); letter-spacing: .08em; }
+  .license .h span:last-child { color: #a33e42; }
+  .license .photo { position: absolute; left: 34px; top: 88px; width: 150px; height: 186px; border-radius: 14px; background: linear-gradient(#b9c8db, #8aa0bd); overflow: hidden; }
+  .license .photo::before { content: ""; position: absolute; left: 45px; top: 36px; width: 60px; height: 60px; border-radius: 50%; background: #e8eef6; }
+  .license .photo::after { content: ""; position: absolute; left: 20px; top: 108px; width: 110px; height: 110px; border-radius: 50%; background: #e8eef6; }
+  .license .lines { position: absolute; left: 214px; top: 96px; right: 34px; display: grid; gap: 14px; font: 600 20px/1 var(--text); }
+  .license .lines b { display: block; font: 700 26px/1.1 var(--display); letter-spacing: -0.01em; }
+  .license .bar { position: absolute; left: 214px; right: 34px; bottom: 30px; height: 42px; background: repeating-linear-gradient(90deg, #10243e 0 3px, transparent 3px 6px, #10243e 6px 7px, transparent 7px 11px); opacity: .75; }
+  .license .scan { position: absolute; left: 0; right: 0; height: 90px; background: linear-gradient(180deg, transparent, rgba(74,144,226,.45), transparent); }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; width: 600px; }
+  .card { padding: 26px 28px; }
+  .card small { display: block; font: 600 20px/1 var(--text); color: rgba(245,245,247,.6); letter-spacing: .01em; }
+  .card strong { display: block; font: 700 54px/1 var(--display); letter-spacing: -0.03em; margin-top: 12px; }
+  .card em { font-style: normal; font: 600 20px/1 var(--text); color: #6fd39f; margin-left: 8px; }
+  .fine { position: absolute; bottom: 44px; left: 0; right: 0; text-align: center; font: 500 18px/1 var(--text); color: rgba(245,245,247,.38); }
+
+  .question { font: 600 72px/1.1 var(--display); letter-spacing: -0.03em; }
+  .caret { display: inline-block; width: 5px; height: 0.9em; background: var(--gold-soft); margin-left: 6px; vertical-align: -0.08em; }
+
+  .privacy h2 { font-size: 112px; }
+  .pillars { display: flex; gap: 90px; justify-content: center; margin-top: 80px; }
+  .pillar { width: 330px; text-align: left; border-top: 1px solid rgba(255,255,255,.18); padding-top: 26px; }
+  .pillar svg { width: 54px; height: 54px; color: var(--gold-soft); }
+  .pillar b { display: block; font: 700 40px/1 var(--display); letter-spacing: -0.03em; margin: 18px 0 10px; }
+  .pillar span { font: 500 23px/1.35 var(--text); color: rgba(245,245,247,.62); }
+
+  .phones { position: absolute; left: 50%; top: 56%; width: 0; height: 0; }
+  .phones .iphone { left: -200px; top: -435px; }
+
+  .end .icon { width: 200px; height: 200px; border-radius: 46px; }
+  .end h1 { font: 700 120px/1 var(--display); letter-spacing: -0.05em; margin-top: 44px; }
+  .end p { font: 500 40px/1.2 var(--text); color: rgba(245,245,247,.7); margin-top: 22px; letter-spacing: -0.02em; }
+  .end .badge { margin-top: 56px; }
+  .end .note { font: 500 22px/1 var(--text); color: rgba(245,245,247,.45); margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="stage bg">
+  <div class="layer" id="aura"><div class="aura"></div></div>
+  <div class="layer" id="navy" style="opacity:0"><div class="navy"></div></div>
+  <div class="layer"><div class="sweep" id="sweep"></div></div>
+
+  <!-- S1: Introducing -->
+  <div class="layer center" id="s0"><div class="intro-word" id="introducing">Introducing</div></div>
+  <div class="layer center" id="s1">
+    <div style="display:grid;justify-items:center">
+      <img class="icon" id="icon1" src="../../assets/app-icon-512.png" alt="">
+      <div class="wordmark" id="wm" style="margin-top:56px">Mottle&nbsp;<span class="gold">POS</span></div>
+    </div>
+  </div>
+
+  <!-- S2: headline over rising iPad -->
+  <div class="layer" id="s2">
+    <div class="top" style="top:120px"><h2 class="display" id="h2a" style="font-size:118px">The whole front desk.</h2>
+      <h2 class="display grad" id="h2b" style="font-size:118px;margin-top:6px">On one iPad.</h2></div>
+  </div>
+
+  <!-- device rig -->
+  <div class="cam" id="cam">
+    <div class="shadow" id="shadow"></div>
+    <div class="rig" id="rig">
+      <div class="ipad"><div class="screen" id="screen">
+        <img id="sc-dash" alt=""><img id="sc-rooms" src="../../assets/ipad-rooms.jpg" alt="">
+        <img id="sc-book" alt=""><img id="sc-checkin" alt="">
+        <img id="sc-checkout" alt=""><img id="sc-clean" alt="">
+        <img id="sc-reports" src="../../assets/ipad-reports.jpg" alt=""><img id="sc-aiq" alt="">
+      </div></div>
+    </div>
+  </div>
+
+  <!-- S3 rooms -->
+  <div class="layer" id="s3"><div class="side left">
+    <h2 class="headline" id="h3">Every room.<br><span class="dim">At a glance.</span></h2>
+    <div class="chips">
+      <div class="chip" style="color:#6fd39f"><i></i><span style="color:#fff">Available</span></div>
+      <div class="chip" style="color:#7fb2f0"><i></i><span style="color:#fff">Occupied</span></div>
+      <div class="chip" style="color:#e9b949"><i></i><span style="color:#fff">Dirty</span></div>
+      <div class="chip" style="color:#ef7b7f"><i></i><span style="color:#fff">Out of service</span></div>
+    </div>
+  </div></div>
+
+  <!-- S4 booking -->
+  <div class="layer" id="s4"><div class="side right">
+    <h2 class="headline" id="h4">Book in<br><span class="gold">seconds.</span></h2>
+    <p class="body">Guest, dates, room. Taxes and rates worked out for you — with a confirmation ready to email, text or print.</p>
+  </div></div>
+
+  <!-- S5 check-in -->
+  <div class="layer" id="s5">
+    <div class="top" style="top:84px"><h2 class="headline" id="h5" style="font-size:88px">From ID to checked in.</h2>
+      <div class="steps" style="justify-content:center" id="steps">
+        <div class="step">Scan ID</div><div class="step">Payment</div><div class="step">Signature</div><div class="step">Checked in</div>
+      </div>
+    </div>
+    <div class="license" id="license">
+      <div class="h"><span>DRIVER LICENSE</span><span>SPECIMEN</span></div>
+      <div class="photo"></div>
+      <div class="lines"><div>NAME<b>Jennifer Brown</b></div><div>DOB<b>04/12/1988</b></div><div>EXP<b>09/30/2030</b></div></div>
+      <div class="bar"></div>
+      <div class="scan" id="scan"></div>
+    </div>
+  </div>
+
+  <!-- S6 checkout → housekeeping -->
+  <div class="layer" id="s6"><div class="side left">
+    <h2 class="headline" id="h6">Checkout tells<br><span class="gold">housekeeping.</span></h2>
+    <div class="chips" id="hk">
+      <div class="chip"><span>Room 105</span><span class="dim" id="hk-state">Checked out</span></div>
+    </div>
+  </div></div>
+
+  <!-- S7 reports -->
+  <div class="layer" id="s7"><div class="side right">
+    <h2 class="headline" id="h7" style="font-size:92px">Close the day<br><span class="dim">with numbers you trust.</span></h2>
+    <div class="cards">
+      <div class="card glass"><small>Revenue</small><strong id="n-rev">$0</strong></div>
+      <div class="card glass"><small>Occupancy</small><strong id="n-occ">0%</strong></div>
+      <div class="card glass"><small>ADR</small><strong id="n-adr">$0</strong></div>
+      <div class="card glass"><small>RevPAR</small><strong id="n-rvp">$0</strong></div>
+    </div>
+  </div>
+  <div class="fine">Example figures shown.</div></div>
+
+  <!-- S8 AI -->
+  <div class="layer" id="s8">
+    <div class="top" style="top:70px">
+      <div class="eyebrow" id="ai-eyebrow" style="font-size:34px">Meet Mottle AI</div>
+      <div class="question" id="question" style="margin-top:18px"><span id="q-text"></span><span class="caret" id="caret"></span></div>
+    </div>
+    <div class="fine" id="ai-fine">Runs entirely on your iPad. Requires a supported device and a one-time model download.</div>
+  </div>
+
+  <!-- S9 privacy -->
+  <div class="layer center privacy" id="s9"><div>
+    <h2 class="headline" id="h9a">Your guests’ data lives on your iPad.</h2>
+    <h2 class="headline gold" id="h9b" style="margin-top:6px">Not on our servers.</h2>
+    <div class="pillars">
+      <div class="pillar"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 5-2.8M22 8.5A15 15 0 0 0 11 4.6M5.5 12a10 10 0 0 1 3.4-1.9M18.5 12a10 10 0 0 0-3-1.8M8.8 15.5a5 5 0 0 1 6.4 0"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg><b>Works offline</b><span>Internet down? The desk keeps working.</span></div>
+      <div class="pillar"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b>Locked down</b><span>Staff PINs, manager approvals, tamper-evident log.</span></div>
+      <div class="pillar"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><b>Encrypted backups</b><span>A file you keep, a password only you know.</span></div>
+    </div>
+  </div></div>
+
+  <!-- S10 iPhone -->
+  <div class="layer" id="s10">
+    <div class="top" style="top:84px"><h2 class="headline" id="h10" style="font-size:92px">The desk in your pocket.</h2></div>
+    <div class="phones" id="phones">
+      <div class="iphone"><div class="screen"><img src="../../assets/iphone-rooms.jpg" alt=""></div></div>
+      <div class="iphone"><div class="screen"><img src="../../assets/iphone-reports.jpg" alt=""></div></div>
+      <div class="iphone"><div class="screen"><img src="../../assets/iphone-dashboard.jpg" alt=""></div></div>
+    </div>
+  </div>
+
+  <!-- S11 end card -->
+  <div class="layer center end" id="s11"><div style="display:grid;justify-items:center">
+    <img class="icon" id="icon2" src="../../assets/app-icon-512.png" alt="">
+    <h1 id="end-h">Mottle POS</h1>
+    <p id="end-p">Run a calmer front desk.</p>
+    <div class="badge" id="end-b"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+      <span><small>Download on the</small><strong>App Store</strong></span></div>
+    <div class="note" id="end-n">Free for 30 days, for your whole property. Listed on the App Store as HOTEL POS.</div>
+  </div></div>
+
+  <div class="vignette"></div>
+</div>
+
+<script src="../engine/engine.js"></script>
+<script>
+const { tw, kf, win, css, $, $$, Seq, words, ease, range, clamp, lerp, Film } = M;
+const E = ease;
+const BAR = 2.5; // 96 bpm
+
+const seq = {
+  dash: new Seq($('#sc-dash'), 'dash', 34),
+  book: new Seq($('#sc-book'), 'book', 103),
+  checkin: new Seq($('#sc-checkin'), 'checkin', 151),
+  checkout: new Seq($('#sc-checkout'), 'checkout', 78),
+  clean: new Seq($('#sc-clean'), 'clean', 87),
+  aiq: new Seq($('#sc-aiq'), 'aiq', 179),
+};
+const W = {
+  h2a: words($('#h2a')), h2b: words($('#h2b')), h3: words($('#h3')), h4: words($('#h4')), h5: words($('#h5')),
+  h6: words($('#h6')), h7: words($('#h7')), h9a: words($('#h9a')), h9b: words($('#h9b')), h10: words($('#h10')),
+};
+// Word-by-word rise with blur; fade out together.
+function reveal(list, t, a, b, stagger = 0.07) {
+  list.forEach((w, i) => {
+    const s = a + i * stagger;
+    const p = E.outQuint(range(t, s, s + 1.0));
+    const out = E.in(range(t, b - 0.45, b));
+    css(w, { y: (1 - p) * 110 - out * 30, o: p * (1 - out), blur: (1 - p) * 10 + out * 8 });
+  });
+}
+function show(id, t, a, b) { const el = $(id); const v = t >= a - 0.05 && t <= b + 0.05; el.style.display = v ? '' : 'none'; return v; }
+
+const Q = 'Who’s arriving today?';
+
+Film({
+  duration: 62.5, fps: 60, bpm: 96, music: 'launch',
+  cues: [
+    { t: 0, type: 'section', level: 0 },
+    { t: 2.5, type: 'impact', gain: 0.9 }, { t: 3.25, type: 'chime', note: 'F#5', gain: 0.6 },
+    { t: 5, type: 'section', level: 1 }, { t: 5.0, type: 'whoosh', dur: 1.1 },
+    { t: 7.4, type: 'whoosh', dur: 1.4, up: false, gain: 0.8 },
+    { t: 10.6, type: 'whoosh', dur: 0.8 },
+    { t: 11.6, type: 'tick' }, { t: 11.85, type: 'tick', f: 2600 }, { t: 12.1, type: 'tick', f: 2800 }, { t: 12.35, type: 'tick', f: 3000 },
+    { t: 15, type: 'section', level: 2 }, { t: 15, type: 'whoosh', dur: 0.8, up: false },
+    { t: 21.2, type: 'success', gain: 0.6 },
+    { t: 22.5, type: 'whoosh', dur: 0.9 },
+    { t: 23.6, type: 'tick', f: 1800 }, { t: 25.0, type: 'tick' }, { t: 26.6, type: 'tick' },
+    { t: 29.4, type: 'success' },
+    { t: 30, type: 'whoosh', dur: 0.8, up: false }, { t: 32.4, type: 'tick' }, { t: 33.6, type: 'tick', f: 2800 },
+    { t: 35, type: 'whoosh', dur: 0.8 },
+    { t: 40, type: 'riser', dur: 2.4 }, { t: 40, type: 'impact', gain: 0.75 }, { t: 40, type: 'section', level: 3 },
+    { t: 41.0, type: 'type', n: 21, dur: 1.4 },
+    { t: 9.3, type: 'poster' },
+    { t: 47.5, type: 'whoosh', dur: 1.2, up: false }, { t: 47.5, type: 'section', level: 1 },
+    { t: 52.5, type: 'whoosh', dur: 1.0 }, { t: 52.5, type: 'section', level: 3 },
+    { t: 57.5, type: 'end' },
+  ],
+  frame(t, pending) {
+    // ---- background
+    css($('#aura'), { o: kf(t, [[0, 0], [2.5, 0.25], [5, 0.7], [47.5, 0.8], [49, 0.35], [52.5, 0.8], [57.5, 0.5], [62.5, 0.3]]),
+      vars: { '--ax': kf(t, [[0, 50], [11, 62], [15, 38], [22.5, 50], [30, 62], [35, 38], [40, 50]]) + '%', '--ay': kf(t, [[0, 80], [10, 72], [40, 60], [57.5, 45]]) + '%' } });
+    css($('#navy'), { o: win(t, 39.7, 48, 0.8, 0.9) });
+    css($('#sweep'), { x: tw(t, 0.4, 3.6, 0, 2900, E.inOut) });
+
+    // ---- S1
+    if (show('#s0', t, 0, 2.6)) {
+      css($('#introducing'), { o: win(t, 0.5, 2.5, 1.2, 0.5), y: tw(t, 0.5, 2.5, 20, -8, E.out), blur: tw(t, 0.5, 1.6, 8, 0, E.out) + range(t, 2.1, 2.5) * 8, s: tw(t, 0.5, 2.5, 1, 1.06, E.linear) });
+    }
+    if (show('#s1', t, 2.4, 6)) {
+      const ip = E.spring(range(t, 2.5, 3.7), 0.22);
+      css($('#icon1'), { s: lerp(0.4, 1, ip) * tw(t, 5, 5.8, 1, 0.6, E.in), o: range(t, 2.5, 2.8) * (1 - range(t, 5, 5.6)), y: tw(t, 2.5, 3.7, 80, 0, E.outExpo) - tw(t, 2.6, 2.6, 0, 0) });
+      const wp = E.outQuint(range(t, 3.2, 4.4));
+      css($('#wm'), { o: wp * (1 - range(t, 4.9, 5.5)), y: (1 - wp) * 40, blur: (1 - wp) * 12 + range(t, 4.9, 5.5) * 10, s: 1 + range(t, 3.2, 5.5) * 0.04 });
+    }
+
+    // ---- S2 headline
+    if (show('#s2', t, 5, 10.8)) {
+      reveal(W.h2a, t, 5.15, 10.6, 0.09);
+      reveal(W.h2b, t, 6.4, 10.6, 0.11);
+      css($('#s2'), { y: tw(t, 7.4, 9.6, 0, -40, E.inOut) });
+    }
+
+    // ---- device rig: one continuous camera move
+    const rise = E.spring(range(t, 7.2, 9.6), 0.08);
+    const X = kf(t, [[0, 0], [10.6, 0], [11.7, 330, E.inOutQuint], [15, 330], [16.0, -330, E.inOutQuint], [22.5, -330], [23.4, 0, E.inOutQuint], [30, 0], [30.9, 330, E.inOutQuint], [35, 330], [35.9, -330, E.inOutQuint], [40, -330], [40.9, 0, E.inOutQuint]]);
+    const Y = kf(t, [[0, 1250], [7.2, 1250], [9.6, 175, E.outQuint], [10.6, 150], [11.7, 30, E.inOutQuint], [22.5, 30], [23.4, 120, E.inOutQuint], [30, 120], [30.9, 30, E.inOutQuint], [40, 30], [40.9, 130, E.inOutQuint], [47.3, 130], [48.6, 1300, E.inExpo]]);
+    const S = kf(t, [[0, 0.8], [9.6, 0.74], [10.6, 0.76], [11.7, 0.82, E.inOutQuint], [22.5, 0.82], [23.4, 0.72, E.inOutQuint], [30, 0.74], [30.9, 0.82, E.inOutQuint], [40, 0.82], [40.9, 0.74, E.inOutQuint], [47.5, 0.76]]);
+    const RY = kf(t, [[0, 0], [10.6, 0], [11.7, -16, E.inOutQuint], [15, -14], [16.0, 16, E.inOutQuint], [22.5, 14], [23.4, 0, E.inOutQuint], [30, 0], [30.9, -16, E.inOutQuint], [35, -14], [35.9, 16, E.inOutQuint], [40, 14], [40.9, 0, E.inOutQuint]]);
+    const RX = lerp(38, 0, rise) + kf(t, [[46.5, 0], [48.6, -24, E.in]]);
+    const visRig = t > 7.0 && t < 48.7;
+    $('#cam').style.display = visRig ? '' : 'none';
+    if (visRig) {
+      css($('#rig'), { x: X, y: Y, s: S, rx: RX, ry: RY });
+      css($('#shadow'), { o: rise * (1 - range(t, 47.3, 48.2)) * 0.9, x: X * 0.9, y: Y * 0.9, s: S });
+      // screen schedule with crossfades
+      const scr = [
+        ['#sc-dash', 7, 11.2], ['#sc-rooms', 11.0, 15.25], ['#sc-book', 15.0, 22.75], ['#sc-checkin', 22.5, 30.25],
+        ['#sc-checkout', 30.0, 32.75], ['#sc-clean', 32.5, 35.25], ['#sc-reports', 35.0, 40.25], ['#sc-aiq', 40.0, 49],
+      ];
+      scr.forEach(([id, a, b], i) => {
+        const o = i === 0 ? (t < b ? 1 : 1 - range(t, b - 0.25, b)) : range(t, a, a + 0.25) * (1 - range(t, b - 0.25, b));
+        css($(id), { o, s: id === '#sc-rooms' ? tw(t, 11, 15.2, 1.0, 1.08, E.linear) : id === '#sc-reports' ? tw(t, 35, 40.2, 1.02, 1.1, E.linear) : 1 });
+        $(id).style.display = o > 0.001 ? '' : 'none';
+      });
+      pending.push(seq.dash.at(t - 8.2, 0.9));
+      if (t > 14.8 && t < 23) pending.push(seq.book.at(t - 15.4, 0.55));
+      if (t > 22.3 && t < 30.5) pending.push(seq.checkin.at(t - 23.0, 0.75));
+      if (t > 29.8 && t < 33) pending.push(seq.checkout.at(t - 30.0, 0.5));
+      if (t > 32.3 && t < 35.5) pending.push(seq.clean.at(t - 32.5 + 1.34, 1.0));
+      if (t > 39.8) pending.push(seq.aiq.at(t - 41.6, 1.0));
+    }
+
+    // ---- S3 rooms
+    if (show('#s3', t, 11, 15.3)) {
+      reveal(W.h3, t, 11.3, 15.2, 0.08);
+      $$('#s3 .chip').forEach((c, i) => { const a = 11.6 + i * 0.25; const p = E.spring(range(t, a, a + 0.9), 0.25);
+        css(c, { o: range(t, a, a + 0.2) * (1 - range(t, 14.8, 15.2)), x: (1 - p) * -60, s: lerp(0.85, 1, p) }); });
+    }
+    // ---- S4 booking
+    if (show('#s4', t, 15.2, 22.6)) {
+      reveal(W.h4, t, 15.5, 22.5, 0.09);
+      const p = E.outQuint(range(t, 16.6, 17.8));
+      css($('#s4 p'), { o: p * (1 - range(t, 22.0, 22.5)), y: (1 - p) * 30 });
+    }
+    // ---- S5 check-in
+    if (show('#s5', t, 22.6, 30.2)) {
+      reveal(W.h5, t, 22.8, 30.0, 0.07);
+      const lp = E.outQuint(range(t, 23.2, 24.2));
+      const lout = E.inExpo(range(t, 24.9, 25.6));
+      css($('#license'), { o: range(t, 23.2, 23.5) * (1 - lout), x: lerp(-700, 120, lp) + lout * 420, y: 600 - lout * 80, r: lerp(-14, -4, lp), s: 1 - lout * 0.5 });
+      css($('#scan'), { y: kf(t, [[23.9, -90], [24.8, 340, E.inOut]]), o: win(t, 23.9, 24.9, 0.15, 0.15) });
+      const stepT = [23.6, 25.4, 26.9, 29.2];
+      $$('#steps .step').forEach((s, i) => {
+        s.classList.toggle('on', t >= stepT[i] && (i === 3 || t < stepT[i + 1]));
+        s.classList.toggle('done', i < 3 && t >= stepT[i + 1]);
+        const p = E.outQuint(range(t, 23.3 + i * 0.1, 24.2 + i * 0.1));
+        css(s, { o: p * (1 - range(t, 29.8, 30.2)), y: (1 - p) * 20 });
+      });
+    }
+    // ---- S6 checkout → housekeeping
+    if (show('#s6', t, 30.1, 35.2)) {
+      reveal(W.h6, t, 30.3, 35.0, 0.08);
+      const st = t < 32.4 ? ['Checked out', '#7fb2f0'] : t < 33.6 ? ['Needs cleaning', '#e9b949'] : ['Clean · Ready', '#6fd39f'];
+      $('#hk-state').textContent = st[0]; $('#hk-state').style.color = st[1];
+      const p = E.spring(range(t, 31.0, 32.0), 0.25);
+      const bump = Math.max(E.spring(range(t, 32.4, 33.0), 0.4) * (1 - range(t, 32.4, 33.0)), E.spring(range(t, 33.6, 34.2), 0.4) * (1 - range(t, 33.6, 34.2)));
+      css($('#hk .chip'), { o: range(t, 31, 31.2) * (1 - range(t, 34.8, 35.2)), s: lerp(0.85, 1, p) + bump * 0.06 });
+    }
+    // ---- S7 reports
+    if (show('#s7', t, 35.1, 40.2)) {
+      reveal(W.h7, t, 35.3, 40.0, 0.07);
+      const cp = E.outExpo(range(t, 36.2, 38.4));
+      $('#n-rev').textContent = M.money(12450 * cp);
+      $('#n-occ').textContent = Math.round(78 * cp) + '%';
+      $('#n-adr').textContent = '$' + Math.round(126 * cp);
+      $('#n-rvp').textContent = '$' + Math.round(98 * cp);
+      $$('#s7 .card').forEach((c, i) => { const a = 35.9 + i * 0.12; const p = E.spring(range(t, a, a + 0.9), 0.2);
+        css(c, { o: range(t, a, a + 0.2) * (1 - range(t, 39.7, 40.1)), y: (1 - p) * 40 }); });
+      css($('#s7 .fine'), { o: win(t, 36, 40, 0.5, 0.4) });
+    }
+    // ---- S8 AI
+    if (show('#s8', t, 40, 47.8)) {
+      const e = E.outQuint(range(t, 40.2, 41.0));
+      css($('#ai-eyebrow'), { o: e * (1 - range(t, 47, 47.5)), y: (1 - e) * 20 });
+      const n = Math.round(clamp((t - 41.0) / 1.4) * Q.length);
+      $('#q-text').textContent = Q.slice(0, n);
+      css($('#caret'), { o: (t < 42.6 ? 1 : (Math.floor(t * 2.4) % 2)) * (1 - range(t, 43.2, 43.4)) });
+      css($('#question'), { o: range(t, 40.9, 41.0) * (1 - range(t, 47, 47.5)) });
+      css($('#ai-fine'), { o: win(t, 42.5, 47.4, 0.6, 0.4) });
+    }
+    // ---- S9 privacy
+    if (show('#s9', t, 47.6, 52.6)) {
+      reveal(W.h9a, t, 48.0, 52.4, 0.06);
+      reveal(W.h9b, t, 48.9, 52.4, 0.09);
+      $$('#s9 .pillar').forEach((p, i) => { const a = 49.6 + i * 0.22; const q = E.outQuint(range(t, a, a + 1));
+        css(p, { o: q * (1 - range(t, 52.0, 52.5)), y: (1 - q) * 40 }); });
+    }
+    // ---- S10 phones
+    if (show('#s10', t, 52.5, 57.8)) {
+      reveal(W.h10, t, 52.8, 57.5, 0.08);
+      const f = E.spring(range(t, 53.0, 54.6), 0.12);
+      const out = E.inExpo(range(t, 57.0, 57.7));
+      $$('#phones .iphone').forEach((ph, i) => {
+        const d = i - 1;
+        css(ph, { x: d * lerp(40, 440, f), y: lerp(900, 0, E.outQuint(range(t, 52.6 + Math.abs(d) * 0.1, 53.8 + Math.abs(d) * 0.1))) + Math.abs(d) * 40 * f + out * 900, r: d * lerp(0, 8, f), s: i === 1 ? 1 : 0.92 });
+        ph.style.zIndex = i === 1 ? 2 : 1;
+      });
+    }
+    // ---- S11 end card
+    if (show('#s11', t, 57.4, 62.5)) {
+      const ip = E.spring(range(t, 57.6, 58.8), 0.2);
+      css($('#icon2'), { o: range(t, 57.6, 57.9), s: lerp(0.5, 1, ip), y: (1 - ip) * 60 });
+      [['#end-h', 58.1], ['#end-p', 58.5], ['#end-b', 59.0], ['#end-n', 59.4]].forEach(([id, a]) => {
+        const p = E.outQuint(range(t, a, a + 1.0));
+        css($(id), { o: p * (1 - range(t, 61.9, 62.5)), y: (1 - p) * 30, blur: (1 - p) * 6 });
+      });
+      css($('#icon2'), { o: range(t, 57.6, 57.9) * (1 - range(t, 61.9, 62.5)) });
+    }
+  },
+});
+</script>
+</body>
+</html>

@@ -10,10 +10,12 @@
       const open = nav.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', String(open));
     });
-    nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    }));
+    const closeMenu = () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+    nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) { closeMenu(); menuBtn.focus(); }
+    });
+    document.addEventListener('click', e => { if (nav.classList.contains('open') && !nav.contains(e.target)) closeMenu(); });
   }
 
   // Dark nav while a dark section sits under it
@@ -93,11 +95,10 @@
     videos.forEach(v => vidIO.observe(v));
   }
 
-  // Film play/pause control
-  document.querySelectorAll('.film').forEach(film => {
-    const v = film.querySelector('video');
-    const btn = film.querySelector('.film-toggle');
-    if (!v || !btn) return;
+  // Play/pause control for every looping video (WCAG 2.2.2: moving content can be paused)
+  document.querySelectorAll('.film-toggle').forEach(btn => {
+    const v = btn.parentElement.querySelector('video');
+    if (!v) return;
     const sync = () => {
       const playing = !v.paused;
       btn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
@@ -113,6 +114,10 @@
     v.addEventListener('pause', sync);
     sync();
   });
+
+  // Films page: one film with sound at a time
+  const players = [...document.querySelectorAll('.film-frame video')];
+  players.forEach(v => v.addEventListener('play', () => players.forEach(o => { if (o !== v) o.pause(); })));
 
   // Native support form → submits to the Google Form in the background
   document.querySelectorAll('form[data-gform]').forEach(form => {

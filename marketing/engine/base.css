@@ -1,0 +1,62 @@
+/* Mottle film engine — shared stage, type and device styles.
+   Palette from the app: navy #10243E, gold #B8893B / #D9BA62, blue #1C5FB0. */
+:root {
+  --navy: #10243e; --navy-deep: #07121f; --gold: #b8893b; --gold-soft: #d9ba62;
+  --blue: #1c5fb0; --blue-bright: #4a90e2; --ink: #1d1d1f; --paper: #f5f5f7;
+  --display: "Inter Display", "Inter", system-ui, sans-serif;
+  --text: "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: var(--W, 1920px); height: var(--H, 1080px); overflow: hidden; background: #000; }
+body { font-family: var(--text); color: #f5f5f7; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.stage { position: absolute; inset: 0; overflow: hidden; background: #000; }
+.layer { position: absolute; inset: 0; will-change: transform, opacity; }
+.center { display: grid; place-items: center; text-align: center; }
+.abs { position: absolute; }
+
+/* Type */
+.display { font-family: var(--display); font-weight: 700; letter-spacing: -0.045em; line-height: 1.0; }
+.headline { font-family: var(--display); font-weight: 700; letter-spacing: -0.035em; line-height: 1.04; }
+.eyebrow { font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; color: var(--gold-soft); }
+.body { font-family: var(--text); font-weight: 500; letter-spacing: -0.015em; color: rgba(245,245,247,.72); }
+.grad { background: linear-gradient(100deg, #f5f5f7 5%, #e9cf86 40%, #d9ba62 55%, #8fb8ef 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gold { background: linear-gradient(95deg, #f0d58c, #d9ba62 40%, #b8893b 75%, #f0d58c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.dim { color: rgba(245,245,247,.42); }
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.02em 0.12em; margin-bottom: -0.12em; }
+.w > span { display: inline-block; will-change: transform, opacity; }
+
+/* iPad — aluminium edge, black glass bezel */
+.ipad { position: absolute; width: 1240px; aspect-ratio: 1440 / 1080; padding: 22px; border-radius: 58px;
+  background: linear-gradient(145deg, #1d1d20, #050506 55%, #18181b);
+  box-shadow: 0 0 0 2px #3a3a3f, 0 0 0 3.5px #121214, inset 0 0 0 1.5px rgba(255,255,255,.08),
+              0 80px 160px -40px rgba(0,0,0,.85), 0 40px 120px -60px rgba(28,95,176,.7); }
+.ipad::after { content: ""; position: absolute; inset: 22px; border-radius: 38px; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 70%, rgba(255,255,255,.04) 100%); }
+.ipad .screen { position: relative; width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: #0b0b0d; }
+.screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* iPhone — titanium band + Dynamic Island */
+.iphone { position: absolute; width: 400px; aspect-ratio: 620 / 1347; padding: 14px; border-radius: 74px;
+  background: linear-gradient(150deg, #3c3c41, #121214 40%, #2a2a2e 70%, #0e0e10);
+  box-shadow: 0 0 0 2px #55555b, inset 0 0 0 2px rgba(0,0,0,.6), 0 60px 120px -40px rgba(0,0,0,.8); }
+.iphone .screen { position: relative; width: 100%; height: 100%; border-radius: 60px; overflow: hidden; background: #fff; }
+.iphone .screen::before { content: ""; position: absolute; z-index: 3; left: 50%; top: 18px; width: 118px; height: 34px; transform: translateX(-50%); border-radius: 20px; background: #000; }
+
+/* Chips & cards */
+.chip { display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; font: 600 28px/1 var(--text); letter-spacing: -0.01em;
+  background: rgba(28,28,32,.72); color: #fff; backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,.6); white-space: nowrap; }
+.chip i { width: 14px; height: 14px; border-radius: 50%; background: currentColor; display: inline-block; }
+.chip.light { background: rgba(255,255,255,.86); color: #1d1d1f; border-color: rgba(0,0,0,.06); }
+.glass { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(30px) saturate(160%); border-radius: 32px; }
+
+/* Glow & grain */
+.glow { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+.vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.55)); }
+.icon-svg { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* App Store badge */
+.badge { display: inline-flex; align-items: center; gap: 16px; padding: 16px 30px 16px 24px; border-radius: 18px; background: #000; border: 1.5px solid rgba(255,255,255,.4); color: #fff; }
+.badge svg { width: 44px; height: 44px; fill: #fff; }
+.badge small { display: block; font: 500 17px/1 var(--text); opacity: .85; }
+.badge strong { display: block; font: 600 34px/1.05 var(--display); letter-spacing: -0.02em; }

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://harsh220601.github.io/mottle-pos/sitemap.xml
